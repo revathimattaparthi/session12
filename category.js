@@ -2,28 +2,28 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var PORT = process.env.PORT || 8080;
-var productNextId = 1;
-products =[];
+var categoryNextId = 1;
+categories =[];
 
 app.get('/', function(req, res){
-	res.send('Products API Root');
+	res.send('Categories API Root');
 });
  app.use(bodyParser.json());
 // get/todos
-app.get('/products', function(req, res){
-	res.json(products);
+app.get('/categories', function(req, res){
+	res.json(categories);
 });
 
 // get/todo/:id
 
-app.get('/products/:id', function(req, res){
+app.get('/categories/:id', function(req, res){
 
-	var productsId = req.params.id;
+	var categoriesId = req.params.id;
 	var matchedobj;
 
-	products.forEach(function (product){
-		if(parseInt(productsId) === product.id){
-			matchedobj = product;
+	categories.forEach(function (category){
+		if(parseInt(categoriesId) === category.id){
+			matchedobj = category;
 		}
 	});
 	 if(matchedobj){
@@ -33,10 +33,10 @@ app.get('/products/:id', function(req, res){
 	 }
 });
 
-app.post('/products', function(req, res){
+app.post('/categories', function(req, res){
 	var body = req.body;
-	 body.id = productNextId++;
-	products.push(body);
+	 body.id = categoryNextId++;
+	categories.push(body);
 	res.json(body);
 
 });
